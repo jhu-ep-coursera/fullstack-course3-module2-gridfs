@@ -32,7 +32,7 @@
 2. Load the Operating System (OS) File
 
     ```ruby
-    > os_file=File.open("./image1.jpg")
+    > os_file=File.open("./image1.jpg", "rb")
      => #<File:./image1.jpg> 
     ```
 
@@ -141,15 +141,13 @@
 2. Create an Output File to Write To
 
     ```ruby
-    > os_file2=File.open("./exported_copy.jpg",'w')
+    > os_file2=File.open("./exported_copy.jpg","wb")
      => #<File:./exported_copy.jpg>
     ```
 
 3. Write data to File
 
     ```ruby
-    > os_file2=File.open("./exported_copy.jpg",'w')
-     => #<File:./exported_copy.jpg> 
     > stored_file.chunks.size
      => 2 
     > stored_file.chunks.reduce([]) { |x,chunk| os_file2 << chunk.data.data }
@@ -243,6 +241,7 @@ but what is within metadata is custom)
 * Query standard properties at document root
 
     ```ruby
+    > require 'pp'
     > pp c.database.fs.find(:contentType=>'image/jpeg', :filename => "myfile.jpg").first
     {"_id"=>BSON::ObjectId('5642f149e301d09ce9000009'),
      "chunkSize"=>261120,
@@ -289,4 +288,4 @@ but what is within metadata is custom)
     > r=c.database.fs.find.delete_many
      => #<Mongo::Operation::Result:18398180 documents=[{"ok"=>1, "n"=>6}]> 
     ```
-
+## Last Updated: 2016-02-21
